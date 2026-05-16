@@ -1,4 +1,5 @@
 {
+  "//": "Force redeploy 3.0",
   "name": "taskly-ai-monorepo",
   "version": "1.0.0",
   "private": true,
