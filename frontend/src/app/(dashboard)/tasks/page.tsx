@@ -22,19 +22,34 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/store/useAuth";
 import axios from "axios";
 
+interface Task {
+  id: string;
+  content: string;
+  priority: string;
+  due: string;
+  comments: number;
+  attachments: number;
+  status: "TODO" | "IN_PROGRESS" | "DONE";
+  assigneeId: string;
+}
+
 // Mock Data
-const initialData = {
+const initialData: {
+  columns: Record<string, { id: string; title: string; taskIds: string[] }>;
+  tasks: Record<string, Task>;
+  columnOrder: string[];
+} = {
   columns: {
     "todo": { id: "todo", title: "To Do", taskIds: ["task-1", "task-2", "task-3"] },
     "in-progress": { id: "in-progress", title: "In Progress", taskIds: ["task-4"] },
     "done": { id: "done", title: "Done", taskIds: ["task-5"] }
   },
   tasks: {
-    "task-1": { id: "task-1", content: "Design landing page mockup", priority: "high", due: "Tomorrow", comments: 3, attachments: 1 },
-    "task-2": { id: "task-2", content: "Set up PostgreSQL database schema", priority: "medium", due: "In 2 days", comments: 0, attachments: 0 },
-    "task-3": { id: "task-3", content: "Implement JWT Authentication", priority: "urgent", due: "Today", comments: 5, attachments: 2 },
-    "task-4": { id: "task-4", content: "Create Next.js frontend structure", priority: "medium", due: "Today", comments: 1, attachments: 0 },
-    "task-5": { id: "task-5", content: "Finalize tech stack", priority: "low", due: "Yesterday", comments: 0, attachments: 0 },
+    "task-1": { id: "task-1", content: "Design landing page mockup", priority: "high", due: "Tomorrow", comments: 3, attachments: 1, status: "TODO", assigneeId: "2" },
+    "task-2": { id: "task-2", content: "Set up PostgreSQL database schema", priority: "medium", due: "In 2 days", comments: 0, attachments: 0, status: "TODO", assigneeId: "1" },
+    "task-3": { id: "task-3", content: "Implement JWT Authentication", priority: "urgent", due: "Today", comments: 5, attachments: 2, status: "TODO", assigneeId: "3" },
+    "task-4": { id: "task-4", content: "Create Next.js frontend structure", priority: "medium", due: "Today", comments: 1, attachments: 0, status: "IN_PROGRESS", assigneeId: "2" },
+    "task-5": { id: "task-5", content: "Finalize tech stack", priority: "low", due: "Yesterday", comments: 0, attachments: 0, status: "DONE", assigneeId: "1" },
   },
   columnOrder: ["todo", "in-progress", "done"],
 };

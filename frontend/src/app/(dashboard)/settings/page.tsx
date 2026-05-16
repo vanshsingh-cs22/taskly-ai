@@ -19,6 +19,7 @@ import {
   Trash2,
   Check
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useAuth } from "@/store/useAuth";
 
 export default function SettingsPage() {
